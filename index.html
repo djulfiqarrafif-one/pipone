@@ -38,7 +38,6 @@
     .font-display {
       font-family: 'Space Grotesk', sans-serif;
     }
-    /* Custom scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -59,13 +58,13 @@
 <body class="antialiased selection:bg-white selection:text-black">
 
   <!-- NAVIGATION -->
-  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 md:px-12 py-5 flex items-center justify-between border-b border-white/5 bg-darkbg/80 backdrop-blur-md">
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 md:px-12 py-5 flex items-center justify-between border-b border-white/10 bg-darkbg/60 backdrop-blur-md">
     <a href="#" class="font-display text-lg md:text-xl tracking-[0.25em] uppercase font-bold text-white">
-      PIPONE <span class="text-xs text-muted font-normal lowercase tracking-normal block md:inline md:tracking-[0.25em]">/ Stray Dog</span>
+      PIPONE <span class="text-xs text-neutral-300 font-normal lowercase tracking-normal block md:inline md:tracking-[0.25em]">/ Stray Dog</span>
     </a>
 
     <!-- Desktop Menu -->
-    <nav class="hidden md:flex items-center space-x-8 text-xs tracking-[0.2em] uppercase text-neutral-300">
+    <nav class="hidden md:flex items-center space-x-8 text-xs tracking-[0.2em] uppercase text-neutral-200">
       <a href="#albums" class="hover:text-white transition">Albums</a>
       <a href="#about" class="hover:text-white transition">About</a>
       <a href="#contact" class="hover:text-white transition">Contact</a>
@@ -87,28 +86,42 @@
     <a href="#contact" class="mobile-link font-display text-3xl uppercase tracking-widest text-white">Contact</a>
   </div>
 
-  <!-- HERO SECTION -->
-  <section class="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
-    <div class="max-w-3xl">
-      <span class="text-xs tracking-[0.3em] uppercase text-muted block mb-4">Visual Storytelling &bull; Portfolio</span>
-      <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight leading-none text-white mb-6">
-        Stray Dog <br/><span class="text-neutral-400 font-light">Archive</span>
-      </h1>
-      <p class="text-neutral-300 font-light text-base md:text-lg leading-relaxed mb-10 max-w-2xl">
-        Capturing the raw energy of motorsports, intense movement in sports events, urban structures, and the raw beauty of natural landscapes.
-      </p>
-      <div class="flex items-center gap-6">
-        <a href="#albums" class="text-xs tracking-[0.2em] uppercase bg-white text-black px-6 py-3 font-medium hover:bg-neutral-200 transition">
-          View Albums
-        </a>
-        <a href="#about" class="text-xs tracking-[0.2em] uppercase text-neutral-300 hover:text-white transition border-b border-transparent hover:border-white pb-1">
-          Learn More
-        </a>
+  <!-- HERO SECTION DENGAN BACKGROUND FOTO PACUAN KUDA -->
+  <section class="relative min-h-screen w-full flex flex-col justify-end pb-20 md:pb-28 pt-32 overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="images/hero-pacuan-kuda.jpg" 
+        alt="PIPONE Stray Dog Hero" 
+        class="w-full h-full object-cover object-center opacity-75"
+      />
+      <!-- Gradient Overlay agar teks kontras dan menyatu dengan section bawah -->
+      <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-darkbg/50 to-darkbg/30"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12">
+      <div class="max-w-3xl">
+        <span class="text-xs tracking-[0.3em] uppercase text-neutral-300 block mb-4">Visual Storytelling &bull; Portfolio</span>
+        <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-bold uppercase tracking-tight leading-none text-white mb-6">
+          PIPONE <br/><span class="text-neutral-300 font-light">Stray Dog</span>
+        </h1>
+        <p class="text-neutral-200 font-light text-base md:text-lg leading-relaxed mb-10 max-w-2xl">
+          Capturing the raw energy of motorsports, intense movement in sports events, urban structures, and the raw beauty of natural landscapes.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href="#albums" class="text-xs tracking-[0.2em] uppercase bg-white text-black px-7 py-3.5 font-medium hover:bg-neutral-200 transition">
+            View Albums
+          </a>
+          <a href="#about" class="text-xs tracking-[0.2em] uppercase text-white hover:text-neutral-300 transition border-b border-white/50 hover:border-white pb-1">
+            Learn More
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ALBUMS / PORTFOLIO SECTION (Struktur ala Markenson) -->
+  <!-- ALBUMS / PORTFOLIO SECTION -->
   <section id="albums" class="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
       <div>
@@ -213,7 +226,7 @@
     <div>&copy; 2026 PIPONE. All Rights Reserved.</div>
   </footer>
 
-  <!-- SCRIPT FOR FILTERING -->
+  <!-- SCRIPT FOR FILTERING & MOBILE MENU -->
   <script>
     const filterBtns = document.querySelectorAll('.filter-btn');
     const albumCards = document.querySelectorAll('.album-card');
@@ -238,7 +251,6 @@
       });
     });
 
-    // Mobile menu toggle
     const menuBtn = document.getElementById('menu-btn');
     const closeMenu = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
