@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pipone — Fotografi & Sajak</title>
-  
-  <!-- Tailwind CSS CDN -->
+  <title>MARKENSON — Editorial & Fine Art Photography</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Inter"', '-apple-system', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            obsidian: '#0b0b0c',
+            charcoal: '#141416',
+            sand: '#e5dfd5',
+            muted: '#8e8d8a',
           }
         }
       }
@@ -29,36 +30,417 @@
 
   <style>
     body {
-      -webkit-font-smoothing: antialiased;
+      background-color: #0b0b0c;
+      color: #f4f3ef;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
     }
-    .filter-btn.active {
-      text-decoration: underline;
-      text-underline-offset: 6px;
-      text-decoration-thickness: 1.5px;
+    .font-editorial {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0b0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2c2c30;
+    }
+    /* Subtle image zoom on hover */
+    .photo-card img {
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+    .photo-card:hover img {
+      transform: scale(1.04);
     }
   </style>
 </head>
-<body id="body-root" class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 font-sans transition-colors duration-300">
+<body class="antialiased selection:bg-sand selection:text-obsidian">
 
-  <!-- HEADER UTAMA ALA MARKENSON -->
-  <header class="max-w-7xl mx-auto px-6 md:px-10 pt-10 pb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-neutral-200 dark:border-neutral-800">
-    <div>
-      <a href="#" onclick="filterCategory('All'); return false;" class="text-xl font-medium tracking-tight">
-        Pipone Fotografie
+  <!-- NAVIGATION -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500 px-6 md:px-14 py-6 flex items-center justify-between">
+    <a href="#" class="font-editorial text-2xl md:text-3xl tracking-[0.2em] uppercase text-white">
+      Markenson
+    </a>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center space-x-10 text-xs tracking-[0.22em] uppercase text-neutral-300">
+      <a href="#portfolio" class="hover:text-white transition">Portfolio</a>
+      <a href="#about" class="hover:text-white transition">Philosophy</a>
+      <a href="#services" class="hover:text-white transition">Services</a>
+      <a href="#contact" class="border border-white/30 px-5 py-2.5 hover:bg-white hover:text-obsidian transition duration-300">
+        Inquire
       </a>
-      <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 font-mono">LOMBOK & SEKITARNYA</p>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="md:hidden text-white focus:outline-none tracking-widest text-xs uppercase">
+      Menu
+    </button>
+  </header>
+
+  <!-- MOBILE OVERLAY MENU -->
+  <div id="mobile-menu" class="fixed inset-0 bg-obsidian z-50 hidden flex-col items-center justify-center space-y-8 text-center">
+    <button id="close-menu" class="absolute top-6 right-6 text-xs tracking-[0.25em] uppercase text-neutral-400 hover:text-white">
+      Close [×]
+    </button>
+    <a href="#portfolio" class="mobile-link font-editorial text-4xl text-white">Portfolio</a>
+    <a href="#about" class="mobile-link font-editorial text-4xl text-white">Philosophy</a>
+    <a href="#services" class="mobile-link font-editorial text-4xl text-white">Services</a>
+    <a href="#contact" class="mobile-link font-editorial text-4xl text-sand italic">Book a Session</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="relative h-screen w-full flex items-end pb-16 md:pb-24 px-6 md:px-14 overflow-hidden">
+    <!-- Background Hero Image (Ganti URL dengan foto terbaik Anda) -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2000&auto=format&fit=crop" 
+        alt="Editorial Portrait" 
+        class="w-full h-full object-cover object-center opacity-55 scale-105 animate-[pulse_18s_ease-in-out_infinite]"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-obsidian/30"></div>
     </div>
 
-    <!-- Navigasi Kategori & Tombol Tema -->
-    <div class="flex flex-wrap items-center justify-between md:justify-end gap-6 text-xs">
-      <nav id="category-filters" class="flex flex-wrap items-center gap-5 text-neutral-500 dark:text-neutral-400">
-        <button onclick="filterCategory('All')" class="filter-btn active hover:text-neutral-900 dark:hover:text-white transition-colors">Tout</button>
-        <button onclick="filterCategory('Alam')" class="filter-btn hover:text-neutral-900 dark:hover:text-white transition-colors">Nature</button>
-        <button onclick="filterCategory('Petualangan')" class="filter-btn hover:text-neutral-900 dark:hover:text-white transition-colors">Aventure</button>
-        <button onclick="filterCategory('Urbain')" class="filter-btn hover:text-neutral-900 dark:hover:text-white transition-colors">Urbain</button>
-        <button onclick="filterCategory('Sajak')" class="filter-btn hover:text-neutral-900 dark:hover:text-white transition-colors">Sajak & Kata</button>
-      </nav>
+    <div class="relative z-10 max-w-5xl">
+      <p class="text-xs tracking-[0.3em] uppercase text-sand mb-4">
+        Editorial &bull; Portrait &bull; Visual Storytelling
+      </p>
+      <h1 class="font-editorial text-5xl sm:text-7xl md:text-8xl font-normal leading-[0.95] text-white mb-6">
+        Capturing raw emotion <br/>
+        <span class="italic font-light text-sand">in timeless frames.</span>
+      </h1>
+      <div class="flex flex-wrap items-center gap-6 pt-2">
+        <a href="#portfolio" class="text-xs tracking-[0.25em] uppercase border-b border-sand pb-1.5 text-white hover:text-sand transition">
+          Explore Selected Works &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
 
-      <!-- Tombol Switch Tema (Clair / Sombre) -->
-      <button onclick="toggleTheme()" id="theme-toggle" class="font-mono text-[11px] border border-neutral-300 dark:border-neutral-700 px-3 py-1.5 rounded hover:border-neutral-900 dark:hover:border-white transition-colors">
-        Sombre / Mode
+  <!-- SELECTED PORTFOLIO GALLERY -->
+  <section id="portfolio" class="py-24 md:py-32 px-6 md:px-14 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+      <div>
+        <span class="text-xs tracking-[0.25em] uppercase text-muted block mb-2">01 / Archive</span>
+        <h2 class="font-editorial text-4xl md:text-6xl text-white">Selected Works</h2>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap gap-6 text-xs tracking-[0.2em] uppercase">
+        <button class="filter-btn text-white border-b border-white pb-1" data-filter="all">All</button>
+        <button class="filter-btn text-muted hover:text-white transition pb-1" data-filter="editorial">Editorial</button>
+        <button class="filter-btn text-muted hover:text-white transition pb-1" data-filter="portrait">Portrait</button>
+        <button class="filter-btn text-muted hover:text-white transition pb-1" data-filter="weddings">Intimate</button>
+      </div>
+    </div>
+
+    <!-- Masonry-style Grid -->
+    <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      
+      <!-- Item 1 -->
+      <div class="photo-card group cursor-pointer relative overflow-hidden bg-charcoal aspect-[3/4]" data-category="editorial" data-title="Vogue Monochrome Study" data-location="Paris, France">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop" alt="Editorial 1" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+          <span class="text-[10px] tracking-[0.25em] uppercase text-sand">Editorial</span>
+          <h3 class="font-editorial text-2xl text-white">Vogue Monochrome Study</h3>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="photo-card group cursor-pointer relative overflow-hidden bg-charcoal aspect-[3/4] lg:translate-y-10" data-category="portrait" data-title="Shadows of Solitude" data-location="Berlin, Germany">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop" alt="Portrait 1" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+          <span class="text-[10px] tracking-[0.25em] uppercase text-sand">Portrait</span>
+          <h3 class="font-editorial text-2xl text-white">Shadows of Solitude</h3>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="photo-card group cursor-pointer relative overflow-hidden bg-charcoal aspect-[3/4]" data-category="weddings" data-title="Autumn Vows in Como" data-location="Lake Como, Italy">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop" alt="Intimate 1" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+          <span class="text-[10px] tracking-[0.25em] uppercase text-sand">Intimate</span>
+          <h3 class="font-editorial text-2xl text-white">Autumn Vows in Como</h3>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="photo-card group cursor-pointer relative overflow-hidden bg-charcoal aspect-[3/4]" data-category="portrait" data-title="Golden Hour Silence" data-location="Jakarta, Indonesia">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1000&auto=format&fit=crop" alt="Portrait 2" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+          <span class="text-[10px] tracking-[0.25em] uppercase text-sand">Portrait</span>
+          <h3 class="font-editorial text-2xl text-white">Golden Hour Silence</h3>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="photo-card group cursor-pointer relative overflow-hidden bg-charcoal aspect-[3/4] lg:translate-y-10" data-category="editorial" data-title="Avant-Garde Structure" data-location="Milan, Italy">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop" alt="Editorial 2" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+          <span class="text-[10px] tracking-[0.25em] uppercase text-sand">Editorial</span>
+          <h3 class="font-editorial text-2xl text-white">Avant-Garde Structure</h3>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="photo-card group cursor-pointer relative overflow-hidden bg-charcoal aspect-[3/4]" data-category="weddings" data-title="Fleeting Embrace" data-location="Bali, Indonesia">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop" alt="Intimate 2" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
+          <span class="text-[10px] tracking-[0.25em] uppercase text-sand">Intimate</span>
+          <h3 class="font-editorial text-2xl text-white">Fleeting Embrace</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT / PHILOSOPHY SECTION -->
+  <section id="about" class="py-24 md:py-36 bg-charcoal/60 border-y border-white/5 px-6 md:px-14">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5">
+        <div class="aspect-[4/5] overflow-hidden bg-obsidian">
+          <img 
+            src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1000&auto=format&fit=crop" 
+            alt="Photographer Portrait" 
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
+          />
+        </div>
+      </div>
+      <div class="lg:col-span-7 lg:pl-10">
+        <span class="text-xs tracking-[0.25em] uppercase text-muted block mb-3">02 / The Philosophy</span>
+        <h2 class="font-editorial text-4xl md:text-6xl text-white leading-tight mb-6">
+          Light, shadow, and the quiet space <span class="italic text-sand">in between.</span>
+        </h2>
+        <p class="text-neutral-300 font-light leading-relaxed mb-6 text-base md:text-lg">
+          Markenson Photography focuses on honest visual storytelling. Moving away from rigid poses, every frame is crafted with natural light, subtle grain, and cinematic composition to preserve the genuine atmosphere of the moment.
+        </p>
+        <p class="text-neutral-400 font-light leading-relaxed mb-10 text-sm md:text-base">
+          Available worldwide for fashion editorials, private portrait commissions, and intimate destination weddings.
+        </p>
+
+        <div class="grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
+          <div>
+            <span class="font-editorial text-3xl md:text-4xl text-white block">8+</span>
+            <span class="text-[11px] tracking-[0.2em] uppercase text-muted">Years Experience</span>
+          </div>
+          <div>
+            <span class="font-editorial text-3xl md:text-4xl text-white block">140+</span>
+            <span class="text-[11px] tracking-[0.2em] uppercase text-muted">Stories Told</span>
+          </div>
+          <div>
+            <span class="font-editorial text-3xl md:text-4xl text-white block">12</span>
+            <span class="text-[11px] tracking-[0.2em] uppercase text-muted">Countries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section id="services" class="py-24 md:py-32 px-6 md:px-14 max-w-6xl mx-auto">
+    <div class="mb-16">
+      <span class="text-xs tracking-[0.25em] uppercase text-muted block mb-2">03 / Commissions</span>
+      <h2 class="font-editorial text-4xl md:text-6xl text-white">Areas of Focus</h2>
+    </div>
+
+    <div class="divide-y divide-white/10 border-y border-white/10">
+      <div class="py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+        <div class="flex items-baseline gap-6">
+          <span class="text-xs text-muted font-mono">01</span>
+          <h3 class="font-editorial text-3xl md:text-4xl text-white group-hover:text-sand transition">Editorial & Lookbooks</h3>
+        </div>
+        <p class="text-sm text-neutral-400 max-w-md font-light">
+          Creative direction, brand campaigns, and seasonal fashion lookbooks tailored for print and digital publications.
+        </p>
+      </div>
+
+      <div class="py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+        <div class="flex items-baseline gap-6">
+          <span class="text-xs text-muted font-mono">02</span>
+          <h3 class="font-editorial text-3xl md:text-4xl text-white group-hover:text-sand transition">Fine Art Portraits</h3>
+        </div>
+        <p class="text-sm text-neutral-400 max-w-md font-light">
+          Personal artist portraits, musician press kits, and timeless monochrome studio or on-location sessions.
+        </p>
+      </div>
+
+      <div class="py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+        <div class="flex items-baseline gap-6">
+          <span class="text-xs text-muted font-mono">03</span>
+          <h3 class="font-editorial text-3xl md:text-4xl text-white group-hover:text-sand transition">Intimate Weddings & Elopements</h3>
+        </div>
+        <p class="text-sm text-neutral-400 max-w-md font-light">
+          Documentary-style coverage capturing unscripted intimacy across Europe, Asia, and worldwide destinations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / INQUIRY SECTION -->
+  <section id="contact" class="py-24 md:py-32 px-6 md:px-14 bg-charcoal/40 border-t border-white/5">
+    <div class="max-w-4xl mx-auto text-center mb-14">
+      <span class="text-xs tracking-[0.25em] uppercase text-sand block mb-3">04 / Contact</span>
+      <h2 class="font-editorial text-4xl md:text-6xl text-white mb-4">Let’s create something timeless.</h2>
+      <p class="text-neutral-400 font-light text-sm md:text-base">
+        Currently accepting bookings for 2026 & 2027. Fill out the form below or email directly at 
+        <a href="mailto:studio@markenson.example" class="text-white underline underline-offset-4">studio@markenson.example</a>
+      </p>
+    </div>
+
+    <form id="inquiry-form" class="max-w-2xl mx-auto space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-[11px] tracking-[0.2em] uppercase text-muted mb-2">Your Name</label>
+          <input type="text" required placeholder="Elena Rostova" class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-sand transition text-sm" />
+        </div>
+        <div>
+          <label class="block text-[11px] tracking-[0.2em] uppercase text-muted mb-2">Email Address</label>
+          <input type="email" required placeholder="elena@domain.com" class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-sand transition text-sm" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-[11px] tracking-[0.2em] uppercase text-muted mb-2">Session Type</label>
+          <select class="w-full bg-obsidian border-b border-white/20 py-3 text-white focus:outline-none focus:border-sand transition text-sm">
+            <option>Editorial / Brand Campaign</option>
+            <option>Portrait Session</option>
+            <option>Wedding / Elopement</option>
+            <option>Other Inquiry</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] tracking-[0.2em] uppercase text-muted mb-2">Preferred Date / Location</label>
+          <input type="text" placeholder="e.g., October 2026, Bali / Paris" class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-sand transition text-sm" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-[11px] tracking-[0.2em] uppercase text-muted mb-2">Tell me about your vision</label>
+        <textarea rows="4" required placeholder="Share details about your project, mood, or story..." class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-sand transition text-sm"></textarea>
+      </div>
+
+      <div class="pt-4 text-center">
+        <button type="submit" class="px-10 py-4 bg-white text-obsidian text-xs tracking-[0.25em] uppercase hover:bg-sand transition duration-300">
+          Send Inquiry
+        </button>
+      </div>
+      <p id="form-feedback" class="text-center text-xs tracking-widest uppercase text-sand hidden pt-2">
+        Thank you. Your inquiry has been received.
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-6 md:px-14 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-muted tracking-[0.2em] uppercase">
+    <div class="font-editorial text-lg text-white tracking-[0.2em]">MARKENSON</div>
+    <div class="flex space-x-8">
+      <a href="#" class="hover:text-white transition">Instagram</a>
+      <a href="#" class="hover:text-white transition">Behance</a>
+      <a href="#" class="hover:text-white transition">Pinterest</a>
+    </div>
+    <div>&copy; 2026 Markenson Photography. All Rights Reserved.</div>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4 md:p-10">
+    <button id="lightbox-close" class="absolute top-6 right-8 text-xs tracking-[0.25em] uppercase text-neutral-400 hover:text-white">
+      Close [ESC]
+    </button>
+    <div class="max-w-4xl max-h-[85vh] flex flex-col items-center">
+      <img id="lightbox-img" src="" alt="Preview" class="max-h-[75vh] w-auto object-contain mb-4" />
+      <div class="text-center">
+        <h4 id="lightbox-title" class="font-editorial text-2xl text-white"></h4>
+        <p id="lightbox-loc" class="text-xs tracking-[0.2em] uppercase text-sand mt-1"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE SCRIPTS -->
+  <script>
+    // Navbar background on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-obsidian/90', 'backdrop-blur-md', 'py-4', 'border-b', 'border-white/5');
+        navbar.classList.remove('py-6');
+      } else {
+        navbar.classList.remove('bg-obsidian/90', 'backdrop-blur-md', 'py-4', 'border-b', 'border-white/5');
+        navbar.classList.add('py-6');
+      }
+    });
+
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.replace('hidden', 'flex'));
+    closeMenu.addEventListener('click', () => mobileMenu.classList.replace('flex', 'hidden'));
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.replace('flex', 'hidden'));
+    });
+
+    // Portfolio Category Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const photoCards = document.querySelectorAll('.photo-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('text-white', 'border-b', 'border-white');
+          b.classList.add('text-muted');
+        });
+        btn.classList.add('text-white', 'border-b', 'border-white');
+        btn.classList.remove('text-muted');
+
+        const filter = btn.getAttribute('data-filter');
+        photoCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Lightbox Modal
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxLoc = document.getElementById('lightbox-loc');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    photoCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const imgSrc = card.querySelector('img').src;
+        lightboxImg.src = imgSrc;
+        lightboxTitle.textContent = card.getAttribute('data-title');
+        lightboxLoc.textContent = card.getAttribute('data-location');
+        lightbox.classList.replace('hidden', 'flex');
+      });
+    });
+
+    const closeLightbox = () => lightbox.classList.replace('flex', 'hidden');
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Form Submission Demo (Ganti dengan Formspree / Web3Forms untuk GitHub Pages)
+    document.getElementById('inquiry-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('form-feedback').classList.remove('hidden');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
